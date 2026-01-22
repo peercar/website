@@ -362,17 +362,37 @@
                 We're launching soon. Get notified when Peercar is available in your area.
             </p>
             
-            <!-- Email input placeholder -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-                <div class="w-full sm:flex-1 bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-5 py-4 text-white/60 text-left">
-                    Coming soon...
-                </div>
-                <button class="w-full sm:w-auto bg-peercar-orange hover:bg-peercar-orange/90 text-white font-bold px-8 py-4 rounded-2xl transition-all hover:scale-105">
+            <!-- Email signup form -->
+            <form id="notify-form" class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <input 
+                    type="email" 
+                    id="email-input"
+                    placeholder="Enter your email address"
+                    required
+                    class="w-full sm:flex-1 bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-5 py-4 text-white placeholder-white/50 text-left focus:outline-none focus:border-peercar-orange focus:ring-2 focus:ring-peercar-orange/30 transition-all"
+                >
+                <button 
+                    type="submit"
+                    class="w-full sm:w-auto bg-peercar-orange hover:bg-peercar-orange/90 text-white font-bold px-8 py-4 rounded-2xl transition-all hover:scale-105 active:scale-95"
+                >
                     Notify Me
                 </button>
-            </div>
+            </form>
         </div>
     </section>
+    
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-peercar-dark border border-peercar-green/30 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 opacity-0 translate-y-4 pointer-events-none transition-all duration-300 z-50">
+        <div class="w-10 h-10 bg-peercar-green/20 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-peercar-green" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <div class="text-left">
+            <p class="font-bold">You're on the list!</p>
+            <p class="text-sm text-white/70">We'll notify you when Peercar launches.</p>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer class="w-full py-10 px-4 sm:px-6 lg:px-8 bg-white border-t border-peercar-light">
@@ -383,9 +403,9 @@
                 
                 <!-- Links -->
                 <div class="flex items-center gap-8">
-                    <a href="#" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Privacy Policy</a>
-                    <a href="#" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Terms of Service</a>
-                    <a href="mailto:support@peercar.rent" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Contact</a>
+                    <a href="privacy.html" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Privacy Policy</a>
+                    <a href="terms.html" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Terms of Service</a>
+                    <a href="mailto:info@peercar.rent" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Contact</a>
                 </div>
                 
                 <!-- Copyright -->
@@ -398,11 +418,40 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Animation initialization
             setTimeout(() => {
                 document.querySelectorAll('.opacity-0').forEach(el => {
                     el.style.opacity = '';
                 });
             }, 100);
+            
+            // Email signup form handler
+            const form = document.getElementById('notify-form');
+            const emailInput = document.getElementById('email-input');
+            const toast = document.getElementById('notification-toast');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                if (email) {
+                    // TODO: Send email to backend
+                    console.log('Email submitted:', email);
+                    
+                    // Show success notification
+                    toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    toast.classList.add('opacity-100', 'translate-y-0');
+                    
+                    // Reset form
+                    emailInput.value = '';
+                    
+                    // Hide notification after 4 seconds
+                    setTimeout(() => {
+                        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                        toast.classList.remove('opacity-100', 'translate-y-0');
+                    }, 4000);
+                }
+            });
         });
     </script>
 </body>
