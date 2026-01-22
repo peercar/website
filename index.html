@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peercar - Coming Soon | Peer-to-Peer Car Sharing</title>
-    <meta name="description" content="Peercar - The future of peer-to-peer car rental. Rent cars from trusted neighbors or earn money by sharing your vehicle. Coming soon to iOS and Android.">
+    <title>Peercar - Coming Soon | People Helping People Move</title>
+    <meta name="description" content="Peercar - Peer-to-peer car sharing platform. Rent cars from your neighbors or earn money by listing your vehicle. Coming soon to iOS and Android.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="PeerCar Deliverables/Favicon/svg/PeerCar Svg-1.svg">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
+    <!-- Reddit Sans Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        'jakarta': ['"Plus Jakarta Sans"', 'sans-serif'],
+                        'reddit': ['"Reddit Sans"', 'sans-serif'],
                     },
                     colors: {
-                        'brand': {
-                            50: '#eef6ff',
-                            100: '#d9eaff',
-                            200: '#bcdbff',
-                            300: '#8ec5ff',
-                            400: '#59a4ff',
-                            500: '#3381fc',
-                            600: '#1d62f1',
-                            700: '#154ede',
-                            800: '#1840b4',
-                            900: '#193a8e',
-                            950: '#142556',
+                        'peercar': {
+                            blue: '#0A57FF',
+                            orange: '#FF8A22',
+                            green: '#08C27F',
+                            white: '#FFFFFF',
+                            light: '#F1F2F4',
+                            gray: '#9BA0A6',
+                            dark: '#1A1A1A',
                         }
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'fade-in': 'fadeIn 0.8s ease-out forwards',
                         'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-15px)' },
+                            '50%': { transform: 'translateY(-12px)' },
                         },
                         fadeIn: {
                             '0%': { opacity: '0' },
@@ -62,33 +62,48 @@
     
     <style>
         * {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Reddit Sans', sans-serif;
         }
         
-        .gradient-text {
-            background: linear-gradient(135deg, #1d62f1 0%, #3381fc 50%, #59a4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-section {
+            background: linear-gradient(135deg, #0A57FF 0%, #0847CC 100%);
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero-gradient {
-            background: linear-gradient(180deg, #f8fafc 0%, #eef6ff 100%);
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400"><path d="M0 300 Q200 250 400 280 T800 260" stroke="white" stroke-width="20" fill="none" opacity="0.1"/><path d="M0 350 Q300 300 500 330 T800 310" stroke="white" stroke-width="15" fill="none" opacity="0.08"/></svg>');
+            background-size: cover;
+            pointer-events: none;
         }
         
         .card-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 
-                        0 10px 15px -3px rgba(0, 0, 0, 0.05),
-                        0 20px 25px -5px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 
+                        0 8px 25px rgba(0, 0, 0, 0.1);
         }
         
         .store-badge {
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
         
         .store-badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(10, 87, 255, 0.15);
         }
         
         .animate-delay-100 { animation-delay: 0.1s; }
@@ -97,194 +112,292 @@
         .animate-delay-400 { animation-delay: 0.4s; }
         .animate-delay-500 { animation-delay: 0.5s; }
         
-        /* Car illustration styling */
-        .car-container {
-            filter: drop-shadow(0 20px 40px rgba(19, 64, 180, 0.15));
+        .image-mask {
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
     </style>
 </head>
-<body class="min-h-screen hero-gradient">
-    <!-- Header -->
-    <header class="w-full py-6 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5" />
+<body class="min-h-screen bg-white font-reddit">
+    
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen relative flex flex-col">
+        <!-- Header -->
+        <header class="w-full py-6 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <!-- Logo -->
+                <img src="PeerCar Deliverables/Logo Lockup/png/PeerCar Png-22.png" alt="Peercar" class="h-10 sm:h-12">
+                
+                <!-- Contact -->
+                <a href="mailto:info@peercar.rent" class="text-white/80 hover:text-white text-sm font-medium transition-colors hidden sm:flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
-                </div>
-                <span class="text-xl font-bold text-gray-900">peer<span class="text-brand-600">car</span></span>
+                    info@peercar.rent
+                </a>
             </div>
-            
-            <!-- Contact -->
-            <a href="mailto:support@peercar.rent" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors hidden sm:block">
-                support@peercar.rent
-            </a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-20">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            
-            <!-- Left Column - Content -->
-            <div class="text-center lg:text-left order-2 lg:order-1">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 bg-brand-50 border border-brand-100 rounded-full px-4 py-2 mb-6 opacity-0 animate-fade-in">
-                    <span class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></span>
-                    <span class="text-sm font-medium text-brand-700">Launching Soon</span>
+        </header>
+        
+        <!-- Hero Content -->
+        <div class="flex-1 flex items-center relative z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    
+                    <!-- Left Column - Content -->
+                    <div class="text-center lg:text-left">
+                        <!-- Badge -->
+                        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8 opacity-0 animate-fade-in">
+                            <span class="w-2 h-2 bg-peercar-green rounded-full animate-pulse-slow"></span>
+                            <span class="text-sm font-semibold text-white">Launching Soon</span>
+                        </div>
+                        
+                        <!-- Heading -->
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-6 opacity-0 animate-slide-up animate-delay-100">
+                            The new way<br>
+                            <span class="text-peercar-orange">to move.</span>
+                        </h1>
+                        
+                        <!-- Description -->
+                        <p class="text-lg sm:text-xl text-white/80 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0 opacity-0 animate-slide-up animate-delay-200">
+                            Rent trusted vehicles from your neighbors or earn passive income by sharing your car. People helping people move.
+                        </p>
+                        
+                        <!-- App Store Badges -->
+                        <div class="opacity-0 animate-slide-up animate-delay-300">
+                            <p class="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">
+                                Coming to
+                            </p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                                <!-- Apple App Store -->
+                                <div class="store-badge cursor-pointer bg-white rounded-2xl px-6 py-4 flex items-center gap-3">
+                                    <svg class="w-8 h-8 text-peercar-dark" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    <span class="text-peercar-dark font-bold text-lg">App Store</span>
+                                </div>
+                                
+                                <!-- Google Play Store -->
+                                <div class="store-badge cursor-pointer bg-white rounded-2xl px-6 py-4 flex items-center gap-3">
+                                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.61-.92z" fill="#00D2FF"/>
+                                        <path d="M17.424 8.377l-3.63 3.623 3.63 3.623 4.138-2.377c.94-.54.94-1.858 0-2.398l-4.138-2.471z" fill="#FFCE00"/>
+                                        <path d="M13.793 12L3.61 22.186c.28.126.6.14.89.04l13.063-7.603L13.793 12z" fill="#FF3A44"/>
+                                        <path d="M3.61 1.814c-.29-.1-.61-.086-.89.04l13.843 7.994L13.793 12 3.61 1.814z" fill="#00F076"/>
+                                    </svg>
+                                    <span class="text-peercar-dark font-bold text-lg">Google Play</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Hero Image -->
+                    <div class="hidden lg:flex justify-center lg:justify-end opacity-0 animate-fade-in animate-delay-200">
+                        <div class="relative">
+                            <img 
+                                src="PeerCar Deliverables/Collateral/peercar15.jpg" 
+                                alt="Happy people using Peercar" 
+                                class="w-full max-w-md xl:max-w-lg rounded-3xl card-shadow object-cover"
+                            >
+                            <!-- Floating badge -->
+                            <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 card-shadow animate-float">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-peercar-green/20 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-peercar-green" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-peercar-dark">Verified</p>
+                                        <p class="text-sm text-peercar-gray">People & Cars</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <!-- Heading -->
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 opacity-0 animate-slide-up animate-delay-100">
-                    The Future of<br>
-                    <span class="gradient-text">Car Sharing</span><br>
-                    is Almost Here
-                </h1>
-                
-                <!-- Description -->
-                <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0 opacity-0 animate-slide-up animate-delay-200">
-                    Rent trusted vehicles from your neighbors or earn passive income by sharing your car. Join thousands waiting for the smarter way to drive.
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 animate-bounce hidden md:block">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="py-20 sm:py-28 bg-peercar-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-peercar-dark mb-4">
+                    Why <span class="text-peercar-blue">Peercar</span>?
+                </h2>
+                <p class="text-lg text-peercar-gray max-w-2xl mx-auto">
+                    Experience freedom, trust, and community-driven car sharing.
                 </p>
-                
-                <!-- App Store Badges -->
-                <div class="mb-8 opacity-0 animate-slide-up animate-delay-300">
-                    <p class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-                        Coming to
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-                        <!-- Apple App Store -->
-                        <div class="store-badge cursor-pointer bg-black rounded-xl px-5 py-3 flex items-center gap-3">
-                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="white">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                            </svg>
-                            <span class="text-white font-semibold text-base">App Store</span>
-                        </div>
-                        
-                        <!-- Google Play Store -->
-                        <div class="store-badge cursor-pointer bg-black rounded-xl px-5 py-3 flex items-center gap-3">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-                                <path d="M3.61 1.814L13.793 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.61-.92z" fill="#00D2FF"/>
-                                <path d="M17.424 8.377l-3.63 3.623 3.63 3.623 4.138-2.377c.94-.54.94-1.858 0-2.398l-4.138-2.471z" fill="#FFCE00"/>
-                                <path d="M13.793 12L3.61 22.186c.28.126.6.14.89.04l13.063-7.603L13.793 12z" fill="#FF3A44"/>
-                                <path d="M3.61 1.814c-.29-.1-.61-.086-.89.04l13.843 7.994L13.793 12 3.61 1.814z" fill="#00F076"/>
-                            </svg>
-                            <span class="text-white font-semibold text-base">Google Play</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Trust Indicators -->
-                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-gray-500 opacity-0 animate-slide-up animate-delay-400">
-                    <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>Verified Owners</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>Fully Insured</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>24/7 Support</span>
-                    </div>
-                </div>
             </div>
             
-            <!-- Right Column - Car Illustration -->
-            <div class="order-1 lg:order-2 flex justify-center lg:justify-end opacity-0 animate-fade-in animate-delay-200">
-                <div class="car-container animate-float">
-                    <svg class="w-full max-w-md lg:max-w-lg" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Background circle -->
-                        <circle cx="200" cy="150" r="120" fill="url(#bg_gradient)" opacity="0.1"/>
-                        
-                        <!-- Car body -->
-                        <path d="M80 180 L100 140 L160 120 L280 120 L320 140 L340 180 L340 200 L80 200 Z" fill="url(#car_gradient)" stroke="#1d62f1" stroke-width="2"/>
-                        
-                        <!-- Windows -->
-                        <path d="M110 145 L150 125 L200 125 L200 165 L110 165 Z" fill="#dbeafe" stroke="#1d62f1" stroke-width="1.5"/>
-                        <path d="M210 125 L270 125 L305 145 L305 165 L210 165 Z" fill="#dbeafe" stroke="#1d62f1" stroke-width="1.5"/>
-                        
-                        <!-- Headlights -->
-                        <ellipse cx="95" cy="175" rx="10" ry="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
-                        <ellipse cx="325" cy="175" rx="10" ry="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
-                        
-                        <!-- Door line -->
-                        <line x1="200" y1="125" x2="200" y2="195" stroke="#1d62f1" stroke-width="1.5"/>
-                        
-                        <!-- Door handles -->
-                        <rect x="165" y="155" width="20" height="4" rx="2" fill="#1d62f1"/>
-                        <rect x="230" y="155" width="20" height="4" rx="2" fill="#1d62f1"/>
-                        
-                        <!-- Wheels -->
-                        <circle cx="130" cy="200" r="30" fill="#1e293b"/>
-                        <circle cx="130" cy="200" r="20" fill="#64748b"/>
-                        <circle cx="130" cy="200" r="8" fill="#1e293b"/>
-                        
-                        <circle cx="290" cy="200" r="30" fill="#1e293b"/>
-                        <circle cx="290" cy="200" r="20" fill="#64748b"/>
-                        <circle cx="290" cy="200" r="8" fill="#1e293b"/>
-                        
-                        <!-- Ground shadow -->
-                        <ellipse cx="210" cy="235" rx="120" ry="10" fill="#1e40af" opacity="0.1"/>
-                        
-                        <!-- Location pin -->
-                        <g transform="translate(320, 80)">
-                            <circle cx="20" cy="20" r="25" fill="#1d62f1" opacity="0.15"/>
-                            <path d="M20 5 C11.716 5 5 11.716 5 20 C5 30 20 42 20 42 C20 42 35 30 35 20 C35 11.716 28.284 5 20 5 Z" fill="#1d62f1"/>
-                            <circle cx="20" cy="19" r="6" fill="white"/>
-                        </g>
-                        
-                        <!-- Key icon -->
-                        <g transform="translate(50, 70)">
-                            <circle cx="15" cy="15" r="20" fill="#10b981" opacity="0.15"/>
-                            <circle cx="15" cy="12" r="8" stroke="#10b981" stroke-width="2.5" fill="none"/>
-                            <rect x="13" y="18" width="4" height="14" rx="2" fill="#10b981"/>
-                            <rect x="17" y="26" width="6" height="3" rx="1" fill="#10b981"/>
-                        </g>
-                        
-                        <defs>
-                            <linearGradient id="bg_gradient" x1="80" y1="30" x2="320" y2="270" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#3381fc"/>
-                                <stop offset="1" stop-color="#1d62f1"/>
-                            </linearGradient>
-                            <linearGradient id="car_gradient" x1="80" y1="120" x2="340" y2="200" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#3381fc"/>
-                                <stop offset="1" stop-color="#1d62f1"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
+            <!-- Feature Cards -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 - Shared Freedom -->
+                <div class="feature-card bg-white rounded-3xl overflow-hidden shadow-lg">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img 
+                            src="PeerCar Deliverables/Collateral/peercar12.jpg" 
+                            alt="Shared Cars, Shared Freedom" 
+                            class="w-full h-full object-cover object-top"
+                        >
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-peercar-dark mb-2">Shared Freedom</h3>
+                        <p class="text-peercar-gray">Access cars on your terms. Drive when you need to, without the burden of ownership.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 - Safe Access -->
+                <div class="feature-card bg-white rounded-3xl overflow-hidden shadow-lg">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img 
+                            src="PeerCar Deliverables/Collateral/peercar20.jpg" 
+                            alt="Safe Access" 
+                            class="w-full h-full object-cover object-top"
+                        >
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-peercar-dark mb-2">Safe Access</h3>
+                        <p class="text-peercar-gray">Verified people, verified cars. Identity and insurance infrastructure you can trust.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 - Shared Wealth -->
+                <div class="feature-card bg-white rounded-3xl overflow-hidden shadow-lg">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img 
+                            src="PeerCar Deliverables/Collateral/peercar17.jpg" 
+                            alt="Shared Wealth" 
+                            class="w-full h-full object-cover object-top"
+                        >
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-peercar-dark mb-2">Shared Wealth</h3>
+                        <p class="text-peercar-gray">Your car becomes an asset. Earn passive income by sharing your vehicle when you're not using it.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="w-full py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-100">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-sm text-gray-500">
-                &copy; 2026 Peercar. All rights reserved.
+    </section>
+    
+    <!-- App Preview Section -->
+    <section class="py-20 sm:py-28 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Left - App Mockup -->
+                <div class="flex justify-center lg:justify-start">
+                    <img 
+                        src="PeerCar Deliverables/Mockups/23.jpg" 
+                        alt="Peercar App" 
+                        class="w-72 sm:w-80 rounded-3xl card-shadow"
+                    >
+                </div>
+                
+                <!-- Right - Content -->
+                <div class="text-center lg:text-left">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-peercar-dark mb-6">
+                        Freedom<br>
+                        <span class="text-peercar-orange">simplified.</span>
+                    </h2>
+                    <p class="text-lg text-peercar-gray leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+                        With Peercar, you decide how you move. Find cars near you, book instantly, and hit the road. It's that simple.
+                    </p>
+                    
+                    <!-- Benefits List -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 justify-center lg:justify-start">
+                            <div class="w-10 h-10 bg-peercar-blue/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-peercar-blue" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-peercar-dark font-medium">Instant booking, no waiting</span>
+                        </div>
+                        <div class="flex items-center gap-4 justify-center lg:justify-start">
+                            <div class="w-10 h-10 bg-peercar-green/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-peercar-green" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-peercar-dark font-medium">Fully insured rides</span>
+                        </div>
+                        <div class="flex items-center gap-4 justify-center lg:justify-start">
+                            <div class="w-10 h-10 bg-peercar-orange/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-peercar-orange" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-peercar-dark font-medium">24/7 roadside assistance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-20 sm:py-28 bg-peercar-dark relative overflow-hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 800 400" fill="none">
+                <path d="M0 300 Q200 250 400 280 T800 260" stroke="#FF8A22" stroke-width="30" fill="none"/>
+                <path d="M0 350 Q300 300 500 330 T800 310" stroke="#08C27F" stroke-width="20" fill="none"/>
+            </svg>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Be the first to know
+            </h2>
+            <p class="text-lg sm:text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+                We're launching soon. Get notified when Peercar is available in your area.
             </p>
-            <div class="flex items-center gap-6">
-                <a href="#" class="text-sm text-gray-500 hover:text-brand-600 transition-colors">Privacy Policy</a>
-                <a href="#" class="text-sm text-gray-500 hover:text-brand-600 transition-colors">Terms of Service</a>
+            
+            <!-- Email input placeholder -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <div class="w-full sm:flex-1 bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-5 py-4 text-white/60 text-left">
+                    Coming soon...
+                </div>
+                <button class="w-full sm:w-auto bg-peercar-orange hover:bg-peercar-orange/90 text-white font-bold px-8 py-4 rounded-2xl transition-all hover:scale-105">
+                    Notify Me
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="w-full py-10 px-4 sm:px-6 lg:px-8 bg-white border-t border-peercar-light">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Logo -->
+                <img src="PeerCar Deliverables/Logo Lockup/png/PeerCar Png-25.png" alt="Peercar" class="h-10">
+                
+                <!-- Links -->
+                <div class="flex items-center gap-8">
+                    <a href="#" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Privacy Policy</a>
+                    <a href="#" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Terms of Service</a>
+                    <a href="mailto:support@peercar.rent" class="text-peercar-gray hover:text-peercar-blue transition-colors font-medium">Contact</a>
+                </div>
+                
+                <!-- Copyright -->
+                <p class="text-peercar-gray text-sm">
+                    &copy; 2026 Peercar. All rights reserved.
+                </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize animations when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Add slight delay to ensure smooth animation start
             setTimeout(() => {
                 document.querySelectorAll('.opacity-0').forEach(el => {
                     el.style.opacity = '';
