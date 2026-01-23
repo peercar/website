@@ -71,16 +71,78 @@
             overflow: hidden;
         }
         
-        .hero-section::before {
-            content: '';
+        /* Animated road pattern */
+        .road-animation {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400"><path d="M0 300 Q200 250 400 280 T800 260" stroke="white" stroke-width="20" fill="none" opacity="0.1"/><path d="M0 350 Q300 300 500 330 T800 310" stroke="white" stroke-width="15" fill="none" opacity="0.08"/></svg>');
-            background-size: cover;
+            inset: 0;
             pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .road-animation svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .road-path {
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 30 20;
+            animation: flowRoad 8s linear infinite;
+        }
+        
+        .road-path-1 {
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 8;
+            animation-duration: 12s;
+        }
+        
+        .road-path-2 {
+            stroke: rgba(255, 138, 34, 0.2);
+            stroke-width: 6;
+            animation-duration: 10s;
+            animation-delay: -2s;
+        }
+        
+        .road-path-3 {
+            stroke: rgba(8, 194, 127, 0.15);
+            stroke-width: 5;
+            animation-duration: 14s;
+            animation-delay: -4s;
+        }
+        
+        .road-path-4 {
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 4;
+            animation-duration: 9s;
+            animation-delay: -1s;
+        }
+        
+        @keyframes flowRoad {
+            0% {
+                stroke-dashoffset: 0;
+            }
+            100% {
+                stroke-dashoffset: -200;
+            }
+        }
+        
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 1;
+            }
         }
         
         .card-shadow {
@@ -122,6 +184,26 @@
     
     <!-- Hero Section -->
     <section class="hero-section min-h-screen relative flex flex-col">
+        <!-- Animated Road Pattern Background -->
+        <div class="road-animation">
+            <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
+                <!-- Main road paths with flowing animation -->
+                <path class="road-path road-path-1" d="M-100 600 Q200 500 500 550 T900 480 T1500 520" />
+                <path class="road-path road-path-2" d="M-100 700 Q300 620 600 680 T1000 600 T1500 650" />
+                <path class="road-path road-path-3" d="M-100 500 Q250 420 550 480 T950 400 T1500 450" />
+                <path class="road-path road-path-4" d="M-100 750 Q350 680 700 720 T1100 660 T1500 700" />
+                <path class="road-path road-path-1" d="M-100 350 Q400 280 700 340 T1200 280 T1500 320" />
+            </svg>
+        </div>
+        
+        <!-- Floating Particles -->
+        <div class="particle w-3 h-3 bg-white/20" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle w-2 h-2 bg-peercar-orange/30" style="top: 40%; left: 85%; animation-delay: 1s;"></div>
+        <div class="particle w-4 h-4 bg-peercar-green/20" style="top: 70%; left: 15%; animation-delay: 2s;"></div>
+        <div class="particle w-2 h-2 bg-white/15" style="top: 30%; left: 75%; animation-delay: 3s;"></div>
+        <div class="particle w-3 h-3 bg-peercar-orange/25" style="top: 60%; left: 90%; animation-delay: 4s;"></div>
+        <div class="particle w-2 h-2 bg-peercar-green/15" style="top: 80%; left: 5%; animation-delay: 5s;"></div>
+        
         <!-- Header -->
         <header class="w-full py-6 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
