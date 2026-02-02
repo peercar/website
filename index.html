@@ -513,27 +513,104 @@
             const form = document.getElementById('notify-form');
             const emailInput = document.getElementById('email-input');
             const toast = document.getElementById('notification-toast');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            // Toast helper function
+            function showToast(type, title, message) {
+                const isSuccess = type === 'success';
+                
+                // Update styling based on type
+                const iconContainer = toast.querySelector('div:first-child');
+                const iconSvg = iconContainer.querySelector('svg');
+                const titleEl = toast.querySelector('p:first-child');
+                const msgEl = toast.querySelector('p:last-child');
+                
+                // Colors
+                if (isSuccess) {
+                    toast.className = toast.className.replace('border-red-500/30', 'border-peercar-green/30');
+                    iconContainer.className = iconContainer.className.replace('bg-red-500/20', 'bg-peercar-green/20');
+                    iconSvg.classList.replace('text-red-500', 'text-peercar-green');
+                    // Success Check Icon
+                    iconSvg.innerHTML = '<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>';
+                } else {
+                    toast.className = toast.className.replace('border-peercar-green/30', 'border-red-500/30');
+                    iconContainer.className = iconContainer.className.replace('bg-peercar-green/20', 'bg-red-500/20');
+                    iconSvg.classList.replace('text-peercar-green', 'text-red-500');
+                    // Error X Icon
+                    iconSvg.innerHTML = '<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>';
+                }
+
+                titleEl.textContent = title;
+                msgEl.textContent = message;
+
+                // Show toast
+                toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                toast.classList.add('opacity-100', 'translate-y-0');
+
+                // Hide after delay
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                }, 4000);
+            }
             
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const email = emailInput.value.trim();
-                if (email) {
-                    // TODO: Send email to backend
-                    console.log('Email submitted:', email);
-                    
-                    // Show success notification
-                    toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    toast.classList.add('opacity-100', 'translate-y-0');
-                    
-                    // Reset form
-                    emailInput.value = '';
-                    
-                    // Hide notification after 4 seconds
-                    setTimeout(() => {
-                        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-                        toast.classList.remove('opacity-100', 'translate-y-0');
-                    }, 4000);
+                if (!email) return;
+
+                // UI Loading state
+                const originalBtnText = submitBtn.innerText;
+                submitBtn.innerText = 'Sending...';
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+                try {
+                    // Get IP Address
+                    let ipAddress = '0.0.0.0'; // Default fallback
+                    try {
+                        const ipRes = await fetch('https://api.ipify.org?format=json');
+                        if (ipRes.ok) {
+                            const ipData = await ipRes.json();
+                            ipAddress = ipData.ip;
+                        }
+                    } catch (err) {
+                        console.warn('Could not fetch IP address:', err);
+                    }
+
+                    // Send to backend
+                    const response = await fetch('http://116.203.29.145:3001/api/v1/waitlist', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            ipAddress: ipAddress
+                        })
+                    });
+
+                    if (response.ok) {
+                        console.log('Email submitted successfully:', email);
+                        showToast('success', "You're on the list!", "We'll notify you when Peercar launches.");
+                        emailInput.value = '';
+                    } else if (response.status === 409) {
+                        console.warn('Email already exists:', email);
+                        showToast('error', 'Already Listed', "You're already on the waitlist!");
+                        emailInput.value = '';
+                    } else {
+                        console.error('Server returned error:', response.status);
+                        showToast('error', 'Something went wrong', 'Please try again later.');
+                    }
+                } catch (error) {
+                    console.error('Network error:', error);
+                    showToast('error', 'Connection Error', 'Unable to reach the server. Please check your connection.');
+                } finally {
+                    // Reset button state
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
                 }
             });
         });
